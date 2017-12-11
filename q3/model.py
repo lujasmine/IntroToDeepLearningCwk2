@@ -1,5 +1,5 @@
 from keras.models import Model
-from keras.layers import Input, Dense, Flatten, Dropout, BatchNormalization, Conv2D
+from keras.layers import Input, Dense, Flatten, Dropout, BatchNormalization, Conv2D, MaxPooling2D
 from keras import regularizers
 from concrete_dropout import ConcreteDropout
 
@@ -14,11 +14,12 @@ def get_model():
 
     inp = Input(shape=input_shape)
     h_1 = Conv2D(32, (3, 3), padding='same', activation='relu')(inp)
-    flat = Flatten()(h_1)
+    max_pool = MaxPooling2D(pool_size=(1, 2))(h_1)
+    flat = Flatten()(max_pool)
 
     hidden_1 = ConcreteDropout(Dense(hidden_size, activation='sigmoid', kernel_initializer='glorot_uniform'))(flat)
-    # h1_drop = Dropout(0.15)(hidden_1)
-    h1 = BatchNormalization()(hidden_1)
+    h1_drop = Dropout(0.15)(hidden_1)
+    h1 = BatchNormalization()(h1_drop)
 
     hidden_2 = Dense(hidden_size, activation='sigmoid', kernel_initializer='glorot_uniform')(h1)
     h2_drop = Dropout(0.1)(hidden_2)
