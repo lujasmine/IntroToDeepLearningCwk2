@@ -13,11 +13,11 @@ def get_model():
 
     inp = Input(shape=input_shape)
 
-    conv_layer_1 = Conv2D(32, (5, 5), padding='same', activation='relu')(inp)
+    conv_layer_1 = Conv2D(32, (3, 3), padding='same', activation='relu')(inp)
     max_pool_1 = MaxPooling2D(pool_size=(1, 2))(conv_layer_1)
     conv_drop_1 = Dropout(0.25)(max_pool_1)
 
-    conv_layer_2 = Conv2D(32, (5, 5), padding='same', activation='relu')(conv_drop_1)
+    conv_layer_2 = Conv2D(32, (3, 3), padding='same', activation='relu')(conv_drop_1)
     max_pool_2 = MaxPooling2D(pool_size=(1, 2))(conv_layer_2)
     conv_drop_2 = Dropout(0.25)(max_pool_2)
 
