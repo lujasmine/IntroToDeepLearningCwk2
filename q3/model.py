@@ -13,17 +13,22 @@ def get_model():
     hidden_size = 128
 
     inp = Input(shape=input_shape)
-    h_1 = Conv2D(32, (3, 3), padding='same', activation='relu')(inp)
-    max_pool = MaxPooling2D(pool_size=(1, 2))(h_1)
-    flat = Flatten()(max_pool)
 
-    hidden_1 = ConcreteDropout(Dense(hidden_size, activation='sigmoid', kernel_initializer='glorot_uniform'))(flat)
-    h1_drop = Dropout(0.15)(hidden_1)
-    h1 = BatchNormalization()(h1_drop)
+    conv_layer = Conv2D(32, (3, 3), padding='same', activation='relu')(inp)
+    max_pool = MaxPooling2D(pool_size=(1, 2))(conv_layer)
+    conv_drop = Dropout(0.25)(max_pool)
 
-    hidden_2 = Dense(hidden_size, activation='sigmoid', kernel_initializer='glorot_uniform')(h1)
-    h2_drop = Dropout(0.1)(hidden_2)
-    h2 = BatchNormalization()(h2_drop)
+    conv_layer_2 = Conv2D(32, (3, 3), padding='same', activation='relu')(conv_drop)
+    max_pool_2 = MaxPooling2D(pool_size=(1, 2))(conv_layer_2)
+    conv_drop_2 = Dropout(0.25)(max_pool_2)
+
+    flat = Flatten()(conv_drop_2)
+
+    hidden_1 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(flat)
+    h1 = BatchNormalization()(hidden_1)
+
+    hidden_2 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(h1)
+    h2 = BatchNormalization()(hidden_2)
 
     out = Dense(nb_classes, activation='softmax')(h2)
 
