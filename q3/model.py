@@ -4,7 +4,6 @@ from keras import regularizers
 from concrete_dropout import ConcreteDropout
 
 def get_model():
-
     # Model parameters
     rows, cols = 28, 28
     input_shape = (rows, cols, 1)
@@ -14,23 +13,23 @@ def get_model():
 
     inp = Input(shape=input_shape)
 
-    conv_layer = Conv2D(32, (3, 3), padding='same', activation='relu')(inp)
-    max_pool = MaxPooling2D(pool_size=(1, 2))(conv_layer)
-    conv_drop = Dropout(0.25)(max_pool)
+    conv_layer_1 = Conv2D(32, (5, 5), padding='same', activation='relu')(inp)
+    max_pool_1 = MaxPooling2D(pool_size=(1, 2))(conv_layer_1)
+    conv_drop_1 = Dropout(0.25)(max_pool_1)
 
-    conv_layer_2 = Conv2D(32, (3, 3), padding='same', activation='relu')(conv_drop)
+    conv_layer_2 = Conv2D(32, (5, 5), padding='same', activation='relu')(conv_drop_1)
     max_pool_2 = MaxPooling2D(pool_size=(1, 2))(conv_layer_2)
     conv_drop_2 = Dropout(0.25)(max_pool_2)
 
     flat = Flatten()(conv_drop_2)
 
-    hidden_1 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(flat)
-    h1 = BatchNormalization()(hidden_1)
+    dense_1 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(flat)
+    dense_1_batch = BatchNormalization()(dense_1)
 
-    hidden_2 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(h1)
-    h2 = BatchNormalization()(hidden_2)
+    dense_2 = Dense(hidden_size, activation='sigmoid', kernel_initializer='lecun_normal')(dense_1_batch)
+    dense_2_batch = BatchNormalization()(dense_2)
 
-    out = Dense(nb_classes, activation='softmax')(h2)
+    out = Dense(nb_classes, activation='softmax')(dense_2_batch)
 
     model = Model(inputs=inp, outputs=out)
 
