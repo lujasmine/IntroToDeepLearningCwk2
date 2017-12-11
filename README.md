@@ -2,7 +2,7 @@
 
 Code for Individual Coursework 2 for COMPM089 Introduction to Deep Learning
 
-Spec for the coursework is in [Coursework spec document](individual_2_spec.pdf)
+Spec for the coursework is in [individual_2_spec.pdf](individual_2_spec.pdf)
 
 ## Question 1
 
