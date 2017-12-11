@@ -2,17 +2,13 @@
 
 Code for Individual Coursework 2 for COMPM089 Introduction to Deep Learning
 
-Spec for the coursework is in `individual_2_spec.pdf`
+Spec for the coursework is in [Coursework spec document](individual_2_spec.pdf)
 
 ## Question 1
 
 Folder `q1` contains code for a python implementation of a 2 hidden layer neural network.
 
-Requires tensorflow to be installed and activated. Run with:
-
-```
-python q1.py
-```
+Requires tensorflow to be installed and activated. Run with `python q1.py`
 
 ## Question 3
 
