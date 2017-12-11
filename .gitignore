@@ -1,0 +1,7 @@
+HotKeywordPaper.pdf
+*.pages
+
+q1/MNIST_data
+
+q3/notMNIST_small.mat
+q3/notMNIST_small.tar.gz
